@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐! 🎀</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+    <div class="bg-hearts"></div>
+
+    <!-- Welcome Overlay -->
+    <div id="welcome-overlay">
+        <div class="overlay-content">
+            <h1>🎉 生日快乐!</h1>
+            <p>点击开启你的专属惊喜</p>
+            <button id="enter-btn">进入派对 🎈</button>
+        </div>
+    </div>
+
+    <header>
+        <h1>生日快乐!</h1>
+        <p class="subtitle">致最特别的你 💕</p>
+    </header>
+
+    <main>
+        <div class="gallery-container">
+            <div class="photo-card">
+                <img src="assets/photo1.jpg" alt="Memory 1">
+                <div class="caption">可爱~</div>
+            </div>
+            <div class="photo-card">
+                <img src="assets/photo2.jpg" alt="Memory 2">
+                <div class="caption">喵喵?</div>
+            </div>
+            <div class="photo-card">
+                <img src="assets/photo3.jpg" alt="Memory 3">
+                <div class="caption">甜蜜</div>
+            </div>
+            <div class="photo-card">
+                <img src="assets/photo4.jpg" alt="Memory 4">
+                <div class="caption">完美</div>
+            </div>
+        </div>
+
+        <section class="walking-moments-section">
+            <h2 class="section-title">回忆长廊 🚶‍♀️</h2>
+            <div class="walking-container">
+                <div class="walking-track">
+                    <!-- Original Set -->
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment1.jpg" alt="Moment 1">
+                        <p class="chinese-caption">生日快乐</p>
+                    </div>
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment2.jpg" alt="Moment 2">
+                        <p class="chinese-caption">心想事成</p>
+                    </div>
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment3.jpg" alt="Moment 3">
+                        <p class="chinese-caption">永远快乐</p>
+                    </div>
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment4.jpg" alt="Moment 4">
+                        <p class="chinese-caption">万事如意</p>
+                    </div>
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment5.jpg" alt="Moment 5">
+                        <p class="chinese-caption">身体健康</p>
+                    </div>
+
+                    <!-- Duplicated Set for Seamless Loop -->
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment1.jpg" alt="Moment 1">
+                        <p class="chinese-caption">生日快乐</p>
+                    </div>
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment2.jpg" alt="Moment 2">
+                        <p class="chinese-caption">心想事成</p>
+                    </div>
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment3.jpg" alt="Moment 3">
+                        <p class="chinese-caption">永远快乐</p>
+                    </div>
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment4.jpg" alt="Moment 4">
+                        <p class="chinese-caption">万事如意</p>
+                    </div>
+                    <div class="walking-item" onclick="openLightbox(this)">
+                        <img src="assets/moment5.jpg" alt="Moment 5">
+                        <p class="chinese-caption">身体健康</p>
+                    </div>
+                </div>
+            </div>
+            <p class="hint-text">✨ 点击或悬停查看详情 ✨</p>
+        </section>
+
+        <section class="game-section">
+            <h2 class="section-title">记忆翻牌小游戏 🎮</h2>
+            <p class="subtitle" style="text-align: center; margin-bottom: 20px;">找到所有匹配的图片来获得惊喜权限！</p>
+            <div class="memory-game">
+                <!-- Cards will be injected by JS -->
+            </div>
+        </section>
+
+        <section class="message-section">
+            <div id="gift-box-container">
+                <p class="click-hint">👇 点击打开礼物 👇</p>
+                <div class="gift-box" onclick="openGift()">
+                    <div class="gift-lid"></div>
+                    <div class="gift-body"></div>
+                </div>
+            </div>
+
+            <div id="hidden-message" class="hidden-content">
+                <!-- Single Flower (Blooming Animation) -->
+                <div id="single-flower-container">
+                    <canvas id="flower-canvas"></canvas>
+                </div>
+
+                <!-- Cake Animation -->
+                <div class="cake-container">
+                    <div class="cake-wrapper">
+                        <!-- main cake -->
+                        <div class="cake-body">
+                            <!-- Face Container -->
+                            <div class="face">
+                                <div class="eye left"></div>
+                                <div class="eye right"></div>
+                                <div class="mouth"></div>
+                                <div class="tear left-tear"></div>
+                                <div class="tear right-tear"></div>
+                            </div>
+
+                            <!-- White Body -->
+                            <div class="layer-white"></div>
+
+                            <!-- Blue Icing -->
+                            <div class="icing-drips-blue">
+                                <div class="drip"></div>
+                                <div class="drip"></div>
+                                <div class="drip"></div>
+                                <div class="drip"></div>
+                                <div class="drip"></div>
+                            </div>
+                            <div class="cake-top-blue"></div>
+
+                            <!-- 3 Candles -->
+                            <div class="candle c1">
+                                <div class="flame"></div>
+                            </div>
+                            <div class="candle c2">
+                                <div class="flame"></div>
+                            </div>
+                            <div class="candle c3">
+                                <div class="flame"></div>
+                            </div>
+                            <!-- Knife (Hidden by default) -->
+                            <div class="knife">🔪</div>
+                        </div>
+
+                        <!-- The slice -->
+                        <div class="cake-slice white-slice">
+                            <div class="slice-side-left"></div>
+                            <div class="slice-side-right"></div>
+                            <div class="slice-top"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon">开启惊喜!</div>
+                <h2 class="message-title">致亲爱的 刘咏琪,</h2>
+                <p>
+                    生日快乐！🎉<br><br>
+                    希望你的每一天都充满快乐、爱和欢笑。
+                    感谢你成为我生命中美好的篇章。
+                    愿你永远闪耀，做最棒的自己！
+                    <br><br>
+                    爱你的， <br>
+                    <i>Sinzz</i>
+                </p>
+                <button id="celebrate-btn" class="celebrate-btn">点我庆祝! 🎁</button>
+                <button id="replay-btn" class="celebrate-btn"
+                    style="display:none; background: #FF69B4; margin-top: 10px;">再玩一次 🔄</button>
+
+                <!-- Audio Control Restored -->
+                <div class="audio-control">
+                    <button id="play-music-btn">🎵 播放音乐</button>
+                    <audio id="birthday-audio" loop>
+                        <!-- User Local File -->
+                        <source src="hbd.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        为特别的你用心制作 💖
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="lightbox-caption"></div>
+    </div>
+
+    <!-- Hidden Elements for Logic -->
+    <div id="hidden-stuff" style="display:none;">
+        <!-- Cake Animation Structure -->
+        <div class="cake-container">
+            <div class="cake-wrapper">
+                <div class="cake-body">
+                    <!-- Face -->
+                    <div class="face">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="mouth"></div>
+                        <div class="tear left-tear"></div>
+                        <div class="tear right-tear"></div>
+                    </div>
+
+                    <div class="layer-white"></div> <!-- Body -->
+                    <div class="layer-blue"></div> <!-- Icing Band -->
+
+                    <div class="icing-drips-blue">
+                        <div class="drip"></div>
+                        <div class="drip"></div>
+                        <div class="drip"></div>
+                        <div class="drip"></div>
+                        <div class="drip"></div>
+                    </div>
+                    <div class="cake-top-blue"></div>
+
+                    <!-- 3 Candles -->
+                    <div class="candle c1">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle c2">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle c3">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+
+                <div class="cake-slice white-slice">
+                    <div class="slice-side-left"></div>
+                    <div class="slice-side-right"></div>
+                    <div class="slice-top"></div>
+                    <div class="slice-back"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="flower.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

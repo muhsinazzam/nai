@@ -1,0 +1,1362 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Pacifico&display=swap');
+
+:root {
+    --bg-color: #FFF0F5;
+    /* Lavender Blush */
+    --card-bg: #FFFFFF;
+    --primary-color: #FFB7C5;
+    /* Cherry Blossom Pink */
+    --text-color: #8B4513;
+    /* Saddle Brown - softer than black */
+    --accent-color: #FF69B4;
+    /* Hot Pink */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-color);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Floating Hearts Background */
+.bg-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    color: var(--primary-color);
+    font-size: 2rem;
+    animation: floatUp 10s linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Hero Section */
+header {
+    text-align: center;
+    padding: 4rem 1rem;
+    animation: fadeIn 2s ease-out;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    color: var(--accent-color);
+    text-shadow: 2px 2px 0px white;
+    margin-bottom: 0.5rem;
+}
+
+p.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* Photo Gallery */
+.gallery-container {
+    max-width: 1000px;
+    width: 90%;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.photo-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 2px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    transform: rotate(var(--rotation));
+}
+
+.photo-card:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    z-index: 10;
+}
+
+.photo-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+}
+
+.caption {
+    margin-top: 0.5rem;
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+/* Walking Section */
+.walking-moments-section {
+    width: 100%;
+    padding: 2rem 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.walking-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.walking-track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: walkScroll 20s linear infinite;
+    /* Removed padding-left to standardise the loop */
+}
+
+/* Pause animation on hover */
+.walking-track:hover {
+    animation-play-state: paused;
+}
+
+.walking-item {
+    width: 200px;
+    /* Slightly larger */
+    flex-shrink: 0;
+    animation: bounce 1s infinite alternate ease-in-out;
+    cursor: pointer;
+    /* Clickable indication */
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.walking-item:hover {
+    transform: scale(1.1);
+    /* Zoom on hover */
+    z-index: 10;
+}
+
+.walking-item img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 3px solid white;
+}
+
+.chinese-caption {
+    margin-top: 10px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.hint-text {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    opacity: 0.8;
+}
+
+/* Stagger the bounce for cuteness */
+.walking-item:nth-child(odd) {
+    animation-delay: 0.1s;
+}
+
+.walking-item:nth-child(even) {
+    animation-delay: 0.5s;
+}
+
+/* Seamless Loop Animation */
+@keyframes walkScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* Move half-way because we duplicated the content */
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Memory Game Section */
+.game-section {
+    max-width: 600px;
+    width: 90%;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.memory-game {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    perspective: 1000px;
+}
+
+.memory-card {
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.memory-card .front-face,
+.memory-card .back-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.memory-card .front-face {
+    transform: rotateY(180deg);
+    background: white;
+}
+
+.memory-card .front-face img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.memory-card .back-face {
+    background: var(--primary-color);
+    font-size: 2rem;
+    color: white;
+}
+
+/* Message Section */
+.message-section {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    margin: 2rem auto;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(255, 183, 197, 0.3);
+    position: relative;
+    border: 2px solid var(--primary-color);
+    min-height: 400px;
+    /* Ensure space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden-content {
+    display: none;
+    animation: fadeIn 1s ease-in;
+    width: 100%;
+}
+
+.hidden-content.show {
+    display: block;
+}
+
+/* Gift Box */
+#gift-box-container {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#gift-box-container:hover {
+    transform: scale(1.05);
+}
+
+.click-hint {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--accent-color);
+    animation: bounce 1s infinite alternate;
+}
+
+.gift-box {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.gift-body {
+    width: 150px;
+    height: 120px;
+    background: var(--accent-color);
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gift-body::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background: white;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gift-lid {
+    width: 170px;
+    height: 40px;
+    background: #FF1493;
+    /* Darker Pink */
+    position: absolute;
+    top: 30px;
+    /* Init position */
+    left: -10px;
+    border-radius: 5px;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease-in-out, top 0.5s ease-in-out;
+}
+
+.gift-lid::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background: white;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Open Animation */
+.gift-box.open .gift-lid {
+    transform: rotate(-120deg);
+    top: -40px;
+    left: -20px;
+}
+
+.gift-box.open .gift-body {
+    animation: fadeOutBox 1s 1s forwards;
+}
+
+#gift-box-container.hidden {
+    display: none;
+}
+
+@keyframes fadeOutBox {
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+/* Flowers */
+.flower-particle {
+    position: absolute;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: flowerPop 1.5s ease-out forwards;
+    z-index: 100;
+}
+
+@keyframes flowerPop {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(var(--rot));
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rot));
+    }
+
+    100% {
+        transform: translate(var(--tx), calc(var(--ty) + 50px)) scale(0.8) rotate(var(--rot));
+        opacity: 0;
+    }
+}
+
+/* === WELCOME OVERLAY === */
+#welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 192, 203, 0.95);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+#welcome-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.overlay-content {
+    text-align: center;
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border: 3px solid var(--accent-color);
+}
+
+#enter-btn {
+    margin-top: 2rem;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Pacifico', cursive;
+    transition: transform 0.2s;
+}
+
+#enter-btn:hover {
+    transform: scale(1.1) rotate(-2deg);
+}
+
+/* === SINGLE FLOWER ANIMATION === */
+.flower-wrapper {
+    position: relative;
+    height: 0;
+    /* Hidden initially */
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.flower-wrapper.show {
+    opacity: 1;
+    height: 200px;
+    /* Give space */
+}
+
+.flower {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-top: 50px;
+    animation: bloomGrow 2s ease-out forwards;
+}
+
+.flower-center {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #FFD700;
+    border-radius: 50%;
+    top: 30px;
+    left: 30px;
+    z-index: 2;
+    box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.petal {
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    background: #FF69B4;
+    border-radius: 50% 50% 0 0;
+    top: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    opacity: 0.9;
+}
+
+.petal:nth-child(2) {
+    transform: translate(-50%, -100%) rotate(0deg);
+}
+
+.petal:nth-child(3) {
+    transform: translate(-50%, -100%) rotate(72deg);
+}
+
+.petal:nth-child(4) {
+    transform: translate(-50%, -100%) rotate(144deg);
+}
+
+.petal:nth-child(5) {
+    transform: translate(-50%, -100%) rotate(216deg);
+}
+
+.petal:nth-child(6) {
+    transform: translate(-50%, -100%) rotate(288deg);
+}
+
+@keyframes bloomGrow {
+    0% {
+        transform: scale(0) translateY(100px);
+    }
+
+    100% {
+        transform: scale(1.5) translateY(0);
+    }
+}
+
+/* === CAKE ANIMATION (CHARACTER) === */
+.cake-container {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1s 0.5s;
+    margin: 40px auto;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+}
+
+.cake-container.show {
+    opacity: 1;
+    height: 250px;
+    overflow: visible;
+}
+
+.cake-wrapper {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    transform-style: preserve-3d;
+    transform: rotateX(-10deg) rotateY(0deg);
+    /* Facing mostly front for face visibility */
+    transition: transform 1s;
+}
+
+/* CAKE BODY */
+.cake-body {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    top: 50px;
+    transform-style: preserve-3d;
+}
+
+/* White Body */
+.layer-white {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    background: #fdfdfd;
+    border-radius: 50% 50% 50% 50% / 20px 20px 20px 20px;
+    background: linear-gradient(to right, #e0e0e0, #ffffff, #e0e0e0);
+    border-radius: 100px / 30px;
+    z-index: 1;
+}
+
+/* Base Shadow */
+.cake-body::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(5px);
+}
+
+/* Blue Top */
+.cake-top-blue {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 60px;
+    background: #4169E1;
+    /* Royal Blue */
+    border-radius: 50%;
+    transform: translateY(-30px);
+    z-index: 10;
+    background: radial-gradient(circle at 30% 30%, #6495ED, #4169E1);
+}
+
+/* Blue Icing Drips */
+.icing-drips-blue {
+    position: absolute;
+    top: -10px;
+    /* Overlap top slightly */
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.drip {
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    background: #4169E1;
+    border-radius: 0 0 15px 15px;
+    top: 0;
+}
+
+.drip:nth-child(1) {
+    left: 10px;
+    height: 35px;
+}
+
+.drip:nth-child(2) {
+    left: 45px;
+    height: 50px;
+}
+
+.drip:nth-child(3) {
+    left: 90px;
+    height: 30px;
+}
+
+.drip:nth-child(4) {
+    left: 130px;
+    height: 45px;
+}
+
+.drip:nth-child(5) {
+    left: 170px;
+    height: 35px;
+}
+
+/* === FACE & EMOTIONS === */
+.face {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    /* On top of drips */
+    transform: translateZ(101px);
+    /* Push to front of cylinder radius (approx) */
+    /* Since standard cylinder is hard, we just absolute position visually on front */
+    transform: translateZ(0);
+    /* Reset Z */
+    /* Wait, css 3d cylinder surface is complex. 
+       Let's just position it in 2D on top of the 3D stack but inside wrapper. 
+       Actually, standard 2D pos works for "front" view. */
+}
+
+.eye {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #000;
+    border-radius: 50%;
+    top: 40px;
+    transition: all 0.5s;
+    animation: blink 4s infinite;
+}
+
+.eye::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    right: 3px;
+}
+
+.eye.left {
+    left: 60px;
+}
+
+.eye.right {
+    right: 60px;
+}
+
+.mouth {
+    position: absolute;
+    width: 30px;
+    height: 15px;
+    border-bottom: 3px solid #000;
+    border-radius: 0 0 15px 15px;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.5s;
+}
+
+/* TEARS */
+.tear {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #00BFFF;
+    border-radius: 50%;
+    top: 50px;
+    opacity: 0;
+}
+
+.tear.left-tear {
+    left: 65px;
+}
+
+.tear.right-tear {
+    right: 65px;
+}
+
+/* === CRYING STATE (Triggered by .cutting) === */
+.cake-wrapper.cutting .eye {
+    height: 5px;
+    /* Squint */
+    border-radius: 5px;
+    animation: none;
+    /* Stop blink */
+    transform: rotate(10deg);
+}
+
+.cake-wrapper.cutting .eye.right {
+    transform: rotate(-10deg);
+}
+
+.cake-wrapper.cutting .mouth {
+    height: 20px;
+    width: 25px;
+    background: #333;
+    border-radius: 50%;
+    /* Open O mouth */
+}
+
+.cake-wrapper.cutting .tear {
+    animation: cry 1s infinite;
+}
+
+/* Extinguish Flames */
+.cake-wrapper.cutting .flame {
+    animation: extinguish 0.5s forwards;
+}
+
+@keyframes extinguish {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(0.5) skewX(20deg);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes cry {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.5);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    96%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    98% {
+        transform: scaleY(0.1);
+    }
+}
+
+/* Tremble Animation */
+@keyframes tremble {
+    0% {
+        transform: rotateX(-10deg) rotateY(0deg) translate(0, 0);
+    }
+
+    25% {
+        transform: rotateX(-10deg) rotateY(0deg) translate(-2px, 1px);
+    }
+
+    50% {
+        transform: rotateX(-10deg) rotateY(0deg) translate(1px, -1px);
+    }
+
+    75% {
+        transform: rotateX(-10deg) rotateY(0deg) translate(-1px, 2px);
+    }
+
+    100% {
+        transform: rotateX(-10deg) rotateY(0deg) translate(0, 0);
+    }
+}
+
+.cake-wrapper.trembling {
+    animation: tremble 0.5s infinite;
+}
+
+/* Staggered Tears */
+.cake-wrapper.cutting .tear.left-tear {
+    animation-delay: 0s;
+}
+
+.cake-wrapper.cutting .tear.right-tear {
+    animation-delay: 0.5s;
+    /* Right eye cries later */
+}
+
+/* === SLICE VISIBILITY FIX === */
+.cake-slice {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    transform-origin: 0% 50%;
+    /* Pivot from center */
+    transition: transform 1.5s ease-in-out;
+    left: 50%;
+    /* Start exactly at center */
+    z-index: 15;
+    /* Ensure on top */
+}
+
+.cake-slice.white-slice .slice-top {
+    background: radial-gradient(circle at 10% 50%, #87CEFA, #4169E1);
+    /* Ensure clip-path makes it a wedge */
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+}
+
+.cake-slice.white-slice .slice-side-left {
+    background: linear-gradient(to bottom, #fdfdfd 30%, #e0e0e0 30%, #e0e0e0 60%, #fdfdfd 60%, #fdfdfd);
+    width: 100px;
+    /* Radius */
+    /* Ensure transform aligns it */
+    transform: rotateY(20deg);
+    z-index: 2;
+}
+
+.cake-slice.white-slice .slice-side-right {
+    background: linear-gradient(to bottom, #fdfdfd 30%, #e0e0e0 30%, #e0e0e0 60%, #fdfdfd 60%, #fdfdfd);
+    width: 100px;
+    transform: rotateY(-20deg);
+    z-index: 2;
+}
+
+.cake-slice.white-slice .slice-back {
+    /* Optional curved back */
+    background: #e0e0e0;
+}
+
+/* === KNIFE ANIMATION === */
+.knife {
+    position: absolute;
+    top: -100px;
+    right: 20px;
+    font-size: 80px;
+    /* Large Emoji Knife */
+    transform: rotate(-30deg);
+    opacity: 0;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.cake-wrapper.cutting-action .knife {
+    animation: cutCake 1s forwards;
+}
+
+@keyframes cutCake {
+    0% {
+        opacity: 1;
+        top: -100px;
+        right: 20px;
+        transform: rotate(-30deg);
+    }
+
+    50% {
+        top: 0px;
+        right: 40px;
+        transform: rotate(-45deg);
+    }
+
+    /* Slice Down */
+    80% {
+        top: 0px;
+        right: 40px;
+        transform: rotate(-45deg);
+    }
+
+    /* Hold */
+    100% {
+        opacity: 0;
+        top: 0px;
+        right: 40px;
+        transform: rotate(-45deg);
+    }
+
+    /* Fade */
+}
+
+/* CANDLES x 3 */
+.candle {
+    position: absolute;
+    width: 8px;
+    height: 35px;
+    background: repeating-linear-gradient(45deg, #fff, #fff 3px, #FF69B4 3px, #FF69B4 6px);
+    z-index: 20;
+    border-radius: 2px;
+}
+
+.candle.c1 {
+    top: -60px;
+    left: 40px;
+    transform: rotate(-5deg);
+}
+
+.candle.c2 {
+    top: -65px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.candle.c3 {
+    top: -60px;
+    right: 40px;
+    transform: rotate(5deg);
+}
+
+.flame {
+    position: absolute;
+    width: 10px;
+    height: 18px;
+    background: orange;
+    top: -15px;
+    left: -1px;
+    border-radius: 50% 50% 20% 20%;
+    animation: flicker 0.1s infinite alternate;
+}
+
+
+@keyframes flicker {
+    from {
+        opacity: 0.8;
+        transform: skewX(-2deg) scale(1);
+    }
+
+    to {
+        opacity: 1;
+        transform: skewX(2deg) scale(1.1);
+    }
+}
+
+
+.message-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.ribbon {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Button */
+button.celebrate-btn,
+button#play-music-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 2rem;
+    margin: 10px;
+}
+
+button.celebrate-btn:hover,
+button#play-music-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+.audio-control {
+    margin-top: 1rem;
+}
+
+footer {
+    padding: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Lightbox Modal */
+.lightbox {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    animation: zoomIn 0.3s;
+}
+
+#lightbox-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+    font-size: 1.5rem;
+    font-family: 'Pacifico', cursive;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--accent-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === MOBILE RESPONSIVENESS (AGGRESSIVE) === */
+body,
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+
+    /* 1. Scale down the 3D Cake */
+    .cake-container.show {
+        height: 180px;
+        /* Reduced height further */
+        margin-top: 20px;
+    }
+
+    .cake-wrapper {
+        transform: scale(0.6) rotateX(-10deg) rotateY(0deg) !important;
+    }
+
+    @keyframes tremble {
+        0% {
+            transform: scale(0.6) rotateX(-10deg) rotateY(0deg) translate(0, 0);
+        }
+
+        25% {
+            transform: scale(0.6) rotateX(-10deg) rotateY(0deg) translate(-2px, 1px);
+        }
+
+        50% {
+            transform: scale(0.6) rotateX(-10deg) rotateY(0deg) translate(1px, -1px);
+        }
+
+        75% {
+            transform: scale(0.6) rotateX(-10deg) rotateY(0deg) translate(-1px, 2px);
+        }
+
+        100% {
+            transform: scale(0.6) rotateX(-10deg) rotateY(0deg) translate(0, 0);
+        }
+    }
+
+    /* Adjust Knife to stay on screen */
+    .knife {
+        font-size: 40px;
+        right: 10px;
+        top: -50px;
+    }
+
+    @keyframes cutCake {
+        0% {
+            opacity: 1;
+            top: -50px;
+            right: 10px;
+            transform: rotate(-30deg);
+        }
+
+        50% {
+            top: 10px;
+            right: 20px;
+            transform: rotate(-45deg);
+        }
+
+        80% {
+            top: 10px;
+            right: 20px;
+            transform: rotate(-45deg);
+        }
+
+        100% {
+            opacity: 0;
+            top: 10px;
+            right: 20px;
+            transform: rotate(-45deg);
+        }
+    }
+
+    /* 2. Adjust Grid for Memory Game: 2 Columns safer for narrow screens */
+    .game-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .card {
+        height: 100px;
+        /* Taller because fewer columns */
+    }
+
+    /* 3. Adjust Photo Gallery */
+    .gallery-container {
+        /* Switch to auto-fit with smaller min-width OR use flex for better safety */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        margin: 2rem 0;
+        padding: 0 10px;
+    }
+
+    .photo-card {
+        width: 45%;
+        /* almost half width */
+        max-width: 150px;
+        /* but cap it */
+    }
+
+    /* 4. Text & Header Adjustments */
+    header {
+        padding: 2rem 0.5rem;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        word-wrap: break-word;
+        line-height: 1.2;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .message-title {
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+
+    .message-section {
+        padding: 20px 5px;
+        /* Reduce padding to give content more room */
+        width: 95%;
+        /* Use almost full width */
+        min-height: auto;
+        overflow: hidden;
+        /* contain inner overflow */
+    }
+
+    /* 5. Walking Items Size */
+    .walking-item {
+        width: 120px !important;
+    }
+
+    .walking-track {
+        gap: 1.5rem;
+    }
+
+    /* 6. Single Flower Adjustments */
+    #single-flower-container {
+        width: 200px;
+        /* Slightly wider to prevent cut-off */
+        height: 300px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        /* Use transform to center exactly */
+        margin-bottom: 20px;
+    }
+
+    #flower-canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Gift Box centering */
+    .gift-box-container {
+        margin: 30px auto;
+        transform: scale(0.9);
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Ensure no overflow from animations */
+    .bg-hearts,
+    .walking-moments-section {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .game-section {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    /* Ensure no overflow from animations */
+    .bg-hearts,
+    .walking-moments-section {
+        width: 100vw;
+        max-width: 100%;
+    }
+}
